@@ -67,8 +67,9 @@ node server.js
 # The server will start on port 4444 by default
 ```
 
-## Usage
+## Demo Video
 A demo video showcasing the platform's features is available here.
+[Watch the demo video](https://drive.google.com/file/d/1ciBFa_Z7OR2ZQu8mzn9M9skOcYJw5Xnb/view?usp=drive_link)
 
 ## Contributing
 Contributions are welcome! To contribute, follow these steps:
