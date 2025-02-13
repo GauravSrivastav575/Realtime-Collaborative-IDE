@@ -41,7 +41,8 @@ const EditorSection = ({ code, setCode, activeFile }) => {
     ydocRef.current = ydoc;
     
     const provider = new WebrtcProvider(`collab-${activeFile}`, ydoc, {
-      signaling: ['ws://localhost:4444'] // Local URL for the signaling server
+      // signaling: ['ws://localhost:4444'] // Local URL for the signaling server
+      signaling: ['https://y-webrtc-l6di.onrender.com'] // deployed URL for the signaling server
     });
     
     providerRef.current = provider;
