@@ -8,26 +8,38 @@
   position: relative; 
 }
 
-.awareness-container {
+.active-users {
   position: absolute;
-  top: 10px; 
-  right: 100px; 
-  background-color: rgba(255, 255, 255, 0.1); 
-  padding: 6px 12px; 
-  border-radius: 8px; 
-  color: #ffffff; 
-  font-size: 12px; 
-  font-weight: 500; 
-  border: 1px solid rgba(255, 255, 255, 0.3); 
-  pointer-events: none; 
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  backdrop-filter: blur(2px);
 }
 
-.awareness-container.active {
-  background-color: rgba(0, 120, 215, 0.2);
-  border-color: rgba(0, 120, 215, 0.5); 
-  animation: pulse 1.5s infinite; 
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
 }
 
+.user-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.user-name {
+  white-space: nowrap;
+}
 
 @keyframes pulse {
   0% {

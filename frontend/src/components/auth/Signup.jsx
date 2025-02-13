@@ -27,6 +27,7 @@ const Signup = () => {
       });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem('userId', response.data.user.id);
+      localStorage.setItem('username', response.data.user.username);
       console.log("Signup Successful:", response.data);
       alert("Signup Successful! You can now log in.");
       navigate("/"); // Navigate to the login page after successful signup

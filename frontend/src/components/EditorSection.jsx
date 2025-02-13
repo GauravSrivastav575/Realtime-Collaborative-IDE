@@ -1,9 +1,14 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState} from "react";
 import Editor from "@monaco-editor/react";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import { MonacoBinding } from "y-monaco";
 import "./EditorSection.css";
+
+const getRandomColor = () => {
+  const hue = Math.floor(Math.random() * 360);
+  return `hsl(${hue}, 70%, 50%)`;
+};
 
 const EditorSection = ({ code, setCode, activeFile }) => {
   const editorRef = useRef(null);
@@ -11,6 +16,7 @@ const EditorSection = ({ code, setCode, activeFile }) => {
   const providerRef = useRef(null);
   const bindingRef = useRef(null);
   const isInitialContentSet = useRef(false);
+  const [activeUsers, setActiveUsers] = useState([]);
 
   const cleanup = () => {
     if (bindingRef.current) {
@@ -41,6 +47,28 @@ const EditorSection = ({ code, setCode, activeFile }) => {
     providerRef.current = provider;
     const ytext = ydoc.getText("monaco");
 
+    const awareness = provider.awareness;
+    const username = localStorage.getItem('username');
+    awareness.setLocalStateField('user', {
+      name: username,
+      color: getRandomColor()
+    });
+
+
+    // Handle awareness changes
+    const handleAwarenessChange = () => {
+      const states = Array.from(awareness.getStates().entries());
+      const users = states
+        .map(([clientId, state]) => ({
+          ...(state.user || {}),
+          clientId,
+        }))
+        .filter(user => user.name);
+      setActiveUsers(users);
+    };
+
+    awareness.on('change', handleAwarenessChange);
+
     // Handle initial content
     const handleSync = () => {
       if (!isInitialContentSet.current && ytext.length === 0) {
@@ -58,6 +86,7 @@ const EditorSection = ({ code, setCode, activeFile }) => {
     }
 
     return () => {
+      awareness.off('change', handleAwarenessChange);
       provider.off('synced', handleSync);
       cleanup();
     };
@@ -77,13 +106,6 @@ const EditorSection = ({ code, setCode, activeFile }) => {
     );
     bindingRef.current = binding;
 
-    // Instead of using ytext.observe, use Monaco's content change event
-    // const disposable = editor.getModel().onDidChangeContent(() => {
-    //   // const newContent = editor.getValue();
-    //   // if (newContent !== code) {
-    //   //   setCode(newContent);
-    //   // }
-    // });
     ytext.observe(() => {
       console.log("Yjs document updated:", ytext.toString());
       setCode(ytext.toString()); // Update editor when Yjs changes
@@ -103,6 +125,17 @@ const EditorSection = ({ code, setCode, activeFile }) => {
 
   return (
     <div className="editor-container">
+      <div className="active-users">
+        {activeUsers.map(user => (
+          <div key={user.clientId} className="user">
+            <span 
+              className="user-color" 
+              style={{ backgroundColor: user.color }}
+            />
+            <span className="user-name">{user.name}</span>
+          </div>
+        ))}
+      </div>
       <Editor
         height="100%"
         width="100%"

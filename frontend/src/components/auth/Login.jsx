@@ -21,6 +21,7 @@ const Login = () => {
       });
       localStorage.setItem("token", response.data.token); // Save token in localStorage
       localStorage.setItem('userId', response.data.user.id); // Save token in localStorage
+      localStorage.setItem('username', response.data.user.username); // Save token in localStorage
       alert("Login Successful!");
       navigate("/"); // Navigate to the editor page after successful login
     } catch (error) {
