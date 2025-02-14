@@ -17,7 +17,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
         if (!userId) {
           throw new Error('User ID not found - please log in again');
         }
-        const response = await fetch(`http://localhost:5000/api/users/${userId}/files`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}/files`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -57,7 +57,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
     setSelectedFile(file._id);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/files/${file._id}/code`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/files/${file._id}/code`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -86,7 +86,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
         if (!userId) {
           throw new Error('User ID not found - please log in again');
         }
-        const response = await fetch('http://localhost:5000/api/files/new', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/files/new`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
     localStorage.setItem('isDeletingFile', 'true');
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:5000/api/files/${fileId}`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/files/${fileId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -156,7 +156,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/files/${fileId}/rename`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/files/${fileId}/rename`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

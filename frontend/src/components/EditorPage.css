@@ -1,4 +1,3 @@
-
 .app-container {
   display: flex;
   height: 100vh;
@@ -15,4 +14,11 @@
   display: flex;
   flex-direction: column;
   flex: 2.5;
+}
+
+.last-saved {
+  font-size: 0.8rem;
+  color: #666;
+  padding: 5px;
+  text-align: right;
 }

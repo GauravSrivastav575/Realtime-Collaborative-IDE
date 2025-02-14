@@ -37,6 +37,7 @@ router.post("/signup", async (req, res) => {
 
 // Login Route
 router.post("/login", async (req, res) => {
+  console.log("Login route called");
   const { email, password } = req.body;
 
   try {

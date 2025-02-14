@@ -16,6 +16,7 @@ function EditorPage() {
   const [activeFile, setActiveFile] = useState(null);
   const [currentCreator, setCurrentCreator] = useState(null);
   const userId = localStorage.getItem('userId');
+  const [lastSaved, setLastSaved] = useState(null);
   // Refs to track latest values
   const activeFileRef = useRef(activeFile);
   const codeRef = useRef(code);
@@ -56,7 +57,7 @@ function EditorPage() {
       const timeoutId = setTimeout(() => controller.abort(), 2000);
 
       // Try normal fetch first
-      await fetch(`http://localhost:5000/api/files/${currentFile}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/files/${currentFile}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -67,6 +68,7 @@ function EditorPage() {
         keepalive: true
       });
       
+      setLastSaved(new Date());
       clearTimeout(timeoutId);
     } catch (error) {
       console.error('Primary save failed, trying beacon:', error);
@@ -97,6 +99,16 @@ function EditorPage() {
         saveCurrentFile();
       }
     };
+  }, []);
+
+  useEffect(() => {
+    const autoSaveInterval = setInterval(() => {
+      if (activeFileRef.current && codeRef.current) {
+        saveCurrentFile();
+      }
+    }, 20000);
+
+    return () => clearInterval(autoSaveInterval);
   }, []);
 
   const handleRunCode = async () => {
@@ -181,6 +193,11 @@ function EditorPage() {
       <div className="editor-panel">
         <EditorSection code={code} setCode={setCode} activeFile={activeFile}/>
         <div className="right-panel">
+          {lastSaved && (
+            <div className="last-saved">
+              Last saved: {lastSaved.toLocaleTimeString()}
+            </div>
+          )}
           {isCreator && activeFile && (<AccessControl fileId={activeFile} />)}
           <RunButton handleRunCode={handleRunCode} />
           <OutputSection output={output} />

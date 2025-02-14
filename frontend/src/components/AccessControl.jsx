@@ -18,7 +18,7 @@ const AccessControl = ({ fileId}) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/files/share', {
+      const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/files/share', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

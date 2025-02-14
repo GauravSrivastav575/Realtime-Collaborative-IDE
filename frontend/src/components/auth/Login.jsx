@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import './Login.css'; // Make sure this line is at the top
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,12 +9,13 @@ const Login = () => {
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleSubmit = async (e) => {
+    console.log(import.meta.env.VITE_BACKEND_URL);
     e.preventDefault();
     setLoading(true);
     try {
       console.log("email", email);
       console.log("password", password);
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, {
         email,
         password,
       });
