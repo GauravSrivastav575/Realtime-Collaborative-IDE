@@ -2,9 +2,6 @@ import express from "express"; // Import Express
 import dotenv from "dotenv"; // Import dotenv for environment variables
 import cors from "cors"; // Import cors for handling Cross-Origin Resource Sharing
 import bodyParser from "body-parser"; // Import body-parser to parse JSON payloads
-import rateLimit from 'express-rate-limit';
-import helmet from 'helmet';
-import compression from 'compression';
 import connectDB from "./config/db.js"; // Import the database connection function
 import router from "./routes/auth.js";
 import userRouter from "./routes/user.js"
@@ -19,19 +16,6 @@ connectDB(); // Calls the function to connect to MongoDB using the connection st
 // Initialize Express application
 const app = express();
 
-// Security middleware
-app.use(helmet());
-
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
-});
-app.use(limiter);
-
-// Compression
-app.use(compression());
-
 // CORS configuration
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
@@ -42,8 +26,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Body parser
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 
 app.use("/api/auth", router)
 app.use("/api/users", userRouter)
