@@ -147,38 +147,38 @@ function EditorPage() {
 
   const handleFileSelect = (fileData) => {
     if (!fileData){
-      setCode('');
+      // setCode('');
       setActiveFile(null);
       activeFileRef.current = null;
-      setTimeout(() => {
+      // setTimeout(() => {
         setCode('');
-      }, 100);
+      // }, 100);
       setCurrentCreator(null);
       // console.log("fileData is null",activeFileRef.current);
       return;
   }
     saveCurrentFile();
     // Reset the code state first
-    setCode('');
+    // setCode('');
     // Then set the new file data
     setActiveFile(fileData.id);
     // Set the code after a small delay to ensure proper initialization
-    setTimeout(() => {
+    // setTimeout(() => {
       setCode(fileData.content);
-    }, 100);
+    // }, 100);
     setCurrentCreator(fileData.createdBy);
   };
 
   const handleCreateFile = (file) => {
     setFiles(prevFiles => [...prevFiles, file]);
     // Reset the code state first
-    setCode('');
+    // setCode('');
     // Then set the new file data
     setActiveFile(file._id);
     // Set the code after a small delay to ensure proper initialization
-    setTimeout(() => {
+    // setTimeout(() => {
       setCode(file.content);
-    }, 100);
+    // }, 100);
     setCurrentCreator(file.createdBy);
   };
   
