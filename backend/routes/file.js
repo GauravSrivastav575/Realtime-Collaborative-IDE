@@ -41,7 +41,7 @@ fileRouter.post("/new", async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error creating file:", error);
+    // console.error("Error creating file:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
@@ -49,7 +49,7 @@ fileRouter.post("/new", async (req, res) => {
 
 // Update codebase of a file
 fileRouter.put("/:fileId", async (req, res) => {
-  console.log("update function hitted");
+  // console.log("update function hitted");
     try {
         const { fileId } = req.params;
         const { codeBase } = req.body;
@@ -73,7 +73,7 @@ fileRouter.put("/:fileId", async (req, res) => {
           },
         });
       } catch (error) {
-        console.error("Error updating file:", error);
+        // console.error("Error updating file:", error);
         res.status(500).json({ error: "Internal server error" });
       }
 });
@@ -96,7 +96,7 @@ fileRouter.get("/:fileId/code", async (req, res) => {
           lastModified: file.lastModified,
         });
       } catch (error) {
-        console.error("Error fetching file code:", error);
+        // console.error("Error fetching file code:", error);
         res.status(500).json({ error: "Internal server error" });
       }
 });
@@ -121,7 +121,7 @@ fileRouter.post("/share", async (req, res) => {
 
     res.status(200).json({ message: "File shared successfully" });
   } catch (error) {
-    console.error("Error sharing file:", error);
+    // console.error("Error sharing file:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
@@ -151,7 +151,7 @@ fileRouter.delete("/:fileId", async (req, res) => {
 
     res.status(200).json({ message: "File deleted successfully" });
   } catch (error) {
-    console.error("Error deleting file:", error);
+    // console.error("Error deleting file:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });

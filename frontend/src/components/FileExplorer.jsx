@@ -34,7 +34,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
         setFiles(formattedFiles);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching files:', error);
+        // console.error('Error fetching files:', error);
         setLoading(false);
         alert(error.message || 'Failed to fetch files');
       }
@@ -72,7 +72,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
         createdBy: data.createdBy,
       });
     } catch (error) {
-      console.error('Error fetching file content:', error);
+      // console.error('Error fetching file content:', error);
       alert(error.message || 'Failed to load file content');
     }
   };
@@ -111,7 +111,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
         onCreateFile(newFile);
         setSelectedFile(newFile._id);
       } catch (error) {
-        console.error('Error creating file:', error);
+        // console.error('Error creating file:', error);
         alert(error.message || 'Failed to create file');
       }
     }
@@ -143,7 +143,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
         setIsDeletingFile(false);
         localStorage.removeItem('isDeletingFile');
     } catch (error) {
-        console.error('Error deleting file:', error);
+        // console.error('Error deleting file:', error);
         alert(error.message || 'Failed to delete file');
         setIsDeletingFile(false);
         localStorage.removeItem('isDeletingFile');
@@ -171,7 +171,7 @@ const FileExplorer = ({ onFileSelect, onCreateFile }) => {
         file._id === fileId ? { ...file, name: newName } : file
       ));
     } catch (error) {
-      console.error('Rename error:', error);
+      // console.error('Rename error:', error);
       alert(error.message || 'Failed to rename file');
     }
   };

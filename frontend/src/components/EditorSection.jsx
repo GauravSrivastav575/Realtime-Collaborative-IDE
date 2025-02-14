@@ -108,7 +108,7 @@ const EditorSection = ({ code, setCode, activeFile }) => {
     bindingRef.current = binding;
 
     ytext.observe(() => {
-      console.log("Yjs document updated:", ytext.toString());
+      // console.log("Yjs document updated:", ytext.toString());
       setCode(ytext.toString()); // Update editor when Yjs changes
     });
     // Clean up the event listener when component unmounts

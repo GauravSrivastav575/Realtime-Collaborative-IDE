@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './AccessControl.css';
 
 const AccessControl = ({ fileId}) => {
-    console.log('AccessControl mounted with fileId:', fileId);
+    // console.log('AccessControl mounted with fileId:', fileId);
     // if(!isCreator) return null;
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);

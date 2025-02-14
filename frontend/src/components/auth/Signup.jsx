@@ -28,11 +28,11 @@ const Signup = () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem('userId', response.data.user.id);
       localStorage.setItem('username', response.data.user.username);
-      console.log("Signup Successful:", response.data);
+      // console.log("Signup Successful:", response.data);
       alert("Signup Successful! You can now log in.");
       navigate("/"); // Navigate to the login page after successful signup
     } catch (error) {
-      console.error("Signup Failed:", error.response?.data?.message || error.message);
+      // console.error("Signup Failed:", error.response?.data?.message || error.message);
       alert(error.response?.data?.message || "Signup Failed! Please try again.");
     } finally {
       setLoading(false); // Enable button after loading is finished

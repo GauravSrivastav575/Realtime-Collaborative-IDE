@@ -32,10 +32,10 @@ function EditorPage() {
   }, [activeFile, code]);
 
   const saveCurrentFile = async () => {
-    console.log("save function hitted");
-    console.log(isSavingRef.current);
+    // console.log("save function hitted");
+    // console.log(isSavingRef.current);
     if (localStorage.getItem('isDeletingFile') === 'true'){
-      console.log("Skipping save - file is being deleted");
+      // console.log("Skipping save - file is being deleted");
       return;
     }
     if (isSavingRef.current) return;
@@ -43,15 +43,15 @@ function EditorPage() {
     
     const currentFile = activeFileRef.current;
     const currentCode = codeRef.current;
-    console.log("currentFile", currentFile);
-    console.log("currentCode", currentCode);
+    // console.log("currentFile", currentFile);
+    // console.log("currentCode", currentCode);
     if (!currentFile || !currentCode) {
       isSavingRef.current = false;
       return;
     }
 
     try {
-      console.log("sending code through fetch api");
+      // console.log("sending code through fetch api");
       const token = localStorage.getItem('token');
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2000);
@@ -71,7 +71,7 @@ function EditorPage() {
       setLastSaved(new Date());
       clearTimeout(timeoutId);
     } catch (error) {
-      console.error('Primary save failed, trying beacon:', error);
+      // console.error('Primary save failed, trying beacon:', error);
     } finally {
       isSavingRef.current = false;
     }
@@ -154,7 +154,7 @@ function EditorPage() {
         setCode('');
       }, 100);
       setCurrentCreator(null);
-      console.log("fileData is null",activeFileRef.current);
+      // console.log("fileData is null",activeFileRef.current);
       return;
   }
     saveCurrentFile();

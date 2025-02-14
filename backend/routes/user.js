@@ -21,7 +21,7 @@ userRouter.get("/:userId/files", async (req, res) => {
     
         res.status(200).json(response);
     } catch (error) {
-        console.error("Error fetching files:", error);
+        // console.error("Error fetching files:", error);
         res.status(500).json({ error: "Internal server error" });
     }
 });

@@ -9,12 +9,12 @@ const Login = () => {
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleSubmit = async (e) => {
-    console.log(import.meta.env.VITE_BACKEND_URL);
+    // console.log(import.meta.env.VITE_BACKEND_URL);
     e.preventDefault();
     setLoading(true);
     try {
-      console.log("email", email);
-      console.log("password", password);
+      // console.log("email", email);
+      // console.log("password", password);
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, {
         email,
         password,
